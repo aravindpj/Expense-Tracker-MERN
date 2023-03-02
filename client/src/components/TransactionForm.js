@@ -33,6 +33,8 @@ export default function TransactionForm({fetchAlltransaction,editTransaction,set
         setForm({...form,date:newValue})
    } 
    
+  
+   
    function reRender(){
       setForm({...initial})
       fetchAlltransaction()
@@ -64,7 +66,6 @@ export default function TransactionForm({fetchAlltransaction,editTransaction,set
     })
     if(response.ok){
       reRender()
-
      }
    }
 
