@@ -15,8 +15,10 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/system';
 import {setUser} from '../store/auth'
+import CategoryForm from '../components/categoryForm'
 export default function  CategoriesForm() {
   const user=useSelector(state=>state.auth.user)
+  const [editCategory,setEditcategory]=React.useState({})
   const token=Cookies.get('token')
   const dispatch=useDispatch()
   async function handleDelete(id){
@@ -37,6 +39,7 @@ export default function  CategoriesForm() {
 
   return (
     <Container>
+    <CategoryForm editCategory={editCategory} setEditcategory={setEditcategory}/>
     <TableContainer sx={{ marginTop:4}} component={Paper}>
       <Typography variant="h6" sx={{marginLeft:3, marginBottom:1 ,color:"#3f51b5"}}>
          List of Categories  
@@ -60,7 +63,7 @@ export default function  CategoriesForm() {
               </TableCell>
               <TableCell align="right">{row.icon}</TableCell>
               <TableCell align='center'>
-                    <IconButton  sx={{marginRight:1}}  color='primary'><EditIcon/></IconButton>
+                    <IconButton  sx={{marginRight:1}} onClick={()=>setEditcategory(row)} color='primary'><EditIcon/></IconButton>
                     <IconButton color='warning' onClick={()=>handleDelete(row._id)} ><DeleteIcon/></IconButton>
               </TableCell>
             </TableRow>
